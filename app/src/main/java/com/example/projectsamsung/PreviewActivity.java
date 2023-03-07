@@ -19,7 +19,7 @@ public class PreviewActivity extends AppCompatActivity {
             Intent intent = new Intent();
 
             intent.setClass(PreviewActivity.this, GameActivity.class);
-
+            startActivity(intent);
         });
 
     }

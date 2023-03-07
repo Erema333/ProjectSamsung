@@ -14,6 +14,6 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         binding = GameViewBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
-        setContentView(binding.getRoot());
+        setContentView(new DrawView(this));
     }
 }
