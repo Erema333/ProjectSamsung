@@ -24,14 +24,12 @@ public class GameActivity extends AppCompatActivity {
         binding = GameViewBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-        setContentView(new StationDraw(this));
         binding.display.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 x = event.getX();
                 y = event.getY();
-                sleep(1000);
-                StationLogic.addStation();
+                binding.game.invalidate();
                 return false;
             }
 

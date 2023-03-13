@@ -9,37 +9,34 @@ import android.graphics.Point;
 import android.graphics.RenderNode;
 import android.view.View;
 
-public class StationDraw extends View {
+import java.util.ArrayList;
+
+public class StationDraw {
+    private final static float RADIUS = 10f;
     public int level = 0;
-    public float x ;
+    public float x;
     public float y;
-    static boolean  repeat = false;
-public static StationLogic.Shape shape;
-    private Paint paint = new Paint();
-    public StationDraw(Context context) {
-        super(context);
+    public StationLogic.Shape shape;
 
-    }
+    private final Paint paint = new Paint();
 
-    public static void DrawStation(StationLogic.Shape shapes){
-shape = shapes;
-repeat = true;
-    }
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        x = (float) (Math.random() * ((1000 - 30) + 1)) + 30;
-        y = (float) (Math.random() * ((2000 - 30) + 1)) + 30;
+    public StationDraw(StationLogic.Shape shape) {
+        this.shape = shape;
         // стиль Заливка
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setColor(Color.BLACK);
+    }
 
-        if(repeat){switch (shape) {
+    public void onDraw(Canvas canvas) {
+        x = (float) (Math.random() * (canvas.getWidth() - RADIUS) + RADIUS);
+        y = (float) (Math.random() * (canvas.getHeight() - RADIUS) + RADIUS);
+
+        switch (shape) {
             case square:
-                canvas.drawRect((float) 40, (float) 40, (float) 100, (float) 100, paint);
+                canvas.drawRect(x - RADIUS, y - RADIUS, x + RADIUS, y + RADIUS, paint);
                 break;
             case circle:
-                canvas.drawCircle(x, y, 40, paint);
+                canvas.drawCircle(x, y, RADIUS, paint);
                 break;
             case triangle:
                 Path path = new Path();
@@ -49,7 +46,7 @@ repeat = true;
                 path.lineTo(x, y);
                 path.close();
                 canvas.drawPath(path, paint);
-        }
+                break;
 
         }
     }
