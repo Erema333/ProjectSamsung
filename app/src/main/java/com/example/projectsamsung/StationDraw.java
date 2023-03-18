@@ -10,28 +10,27 @@ import android.graphics.RenderNode;
 import android.view.View;
 
 import java.util.ArrayList;
-
+// Класс который рисует на холсте станции
 public class StationDraw {
-    private final static float RADIUS = 10f;
-    public int level = 0;
+    private final static float RADIUS = 40; // размер станции
+    public int level = 0;// уровень станции
     public float x;
     public float y;
-    public StationLogic.Shape shape;
+    public StationLogic.Shape shape; // фигура станции
 
     private final Paint paint = new Paint();
 
-    public StationDraw(StationLogic.Shape shape) {
+    public StationDraw(StationLogic.Shape shape) { // конструктор
         this.shape = shape;
-        // стиль Заливка
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setColor(Color.BLACK);
     }
 
-    public void onDraw(Canvas canvas) {
+    public void onDraw(Canvas canvas) {  //todo: Рисует станции
         x = (float) (Math.random() * (canvas.getWidth() - RADIUS) + RADIUS);
         y = (float) (Math.random() * (canvas.getHeight() - RADIUS) + RADIUS);
 
-        switch (shape) {
+        switch (shape) { // выбор рисования станции в зависимости от фигуры
             case square:
                 canvas.drawRect(x - RADIUS, y - RADIUS, x + RADIUS, y + RADIUS, paint);
                 break;

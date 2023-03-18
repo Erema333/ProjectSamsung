@@ -17,7 +17,7 @@ import java.util.Arrays;
 
 public class GameActivity extends AppCompatActivity {
     private GameViewBinding binding;
-    private static double x,y;
+    private static double x,y; // координаты нажатия
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,7 +26,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         binding.display.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public boolean onTouch(View v, MotionEvent event) { /* TODO: при нажатии получаются координаты нажатия и
+                                                                   TODO: **вызывается обновление холста** */
                 x = event.getX();
                 y = event.getY();
                 binding.game.invalidate();
@@ -37,7 +38,7 @@ public class GameActivity extends AppCompatActivity {
     }
     public static double getCordX(){
         return x;
-    }
+    } // методы возращающие координаты нажатия
     public double getCordY(){
         return y;
     }

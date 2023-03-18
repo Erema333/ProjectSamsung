@@ -15,7 +15,7 @@ public class PreviewActivity extends AppCompatActivity {
         binding = PreViewBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
-        binding.cont.setOnClickListener(view -> {
+        binding.cont.setOnClickListener(view -> { // TODO: смена активити после нажатия на кнопку "продолжить", через интент
             Intent intent = new Intent();
 
             intent.setClass(PreviewActivity.this, GameActivity.class);
