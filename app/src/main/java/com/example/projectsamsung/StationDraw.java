@@ -30,21 +30,59 @@ ArrayList CordX = new ArrayList();
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setColor(Color.BLACK);
     }
+public void CordTestY(){
+        int g = 0;
+    while (g != -5) {
+        g = 0;
+        y = (float) (Math.random() * (2000 - 30) + 30);
+        Collections.sort(CordY);
+        //==========================================
+        for (int i = 0; i < CordY.size(); i++) {
+            if (CordY.get(i) != null) {
+                if ((((float) CordY.get(i)) > y + 70) || ((float) CordY.get(i) < y - 70)) {
+                    g++;
+
+                } else break;
+            }
+        }
+        //=======================================
+        if (g == CordY.size()) g = -5;
+        CordY.add(y);
+    }
 
 
+}
+public void CordTestX(){
+        int g = 0;
+        while (g != -5) {
+            g = 0;
+            x = (float) (Math.random() * (1000 - 30) + 30);
+            Collections.sort(CordX);
+            //==========================================
+            for (int i = 0; i < CordX.size(); i++) {
+                if (CordX.get(i) != null) {
+                    if ((((float) CordX.get(i)) > x + 70) || ((float) CordX.get(i) < x - 70)) {
+                        g++;
+
+                    } else break;
+                }
+            }
+            //=======================================
+            if (g == CordX.size()) g = -5;
+            CordX.add(x);
+        }
+
+
+    }
 
     public void onDraw(Canvas canvas) {  //todo: Рисует станции
         if(x == null){
-            x = (float) (Math.random() * (canvas.getWidth() - RADIUS) + RADIUS);
-            CordX.add(x);
-            Collections.sort(CordX);
+            CordTestX();
 
            
         }
         if(y == null){
-            y = (float) (Math.random() * (canvas.getWidth() - RADIUS) + RADIUS);
-            CordY.add(y);
-            Collections.sort(CordX);
+            CordTestY();
 
 
             }
