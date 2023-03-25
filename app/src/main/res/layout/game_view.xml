@@ -5,17 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GameActivity">
-
+    <com.example.projectsamsung.GameView
+        android:id="@+id/game"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <ImageButton
-        android:id="@+id/searchImageButton"
+        android:id="@+id/setting"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_gravity="start|top"
         android:background="@drawable/set" />
 
-    <com.example.projectsamsung.GameView
-        android:id="@+id/game"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/time_view"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="650dp"
+        android:layout_marginVertical="30dp"
+        android:gravity="left"
+        />
+
+
+
+
+
 
 </FrameLayout>

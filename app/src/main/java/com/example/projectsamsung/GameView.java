@@ -11,20 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameView extends View {
-    private ArrayList<StationDraw> stations = new ArrayList<>(); // массив со всеми станциями
+    private static ArrayList<StationDraw> stations = new ArrayList<>(); // массив со всеми станциями
 
     public GameView(Context context, @Nullable AttributeSet attrs) {  // TODO: конструктор при вызови кторого добовляется станция
         super(context, attrs);
-        addTests();
+        addStation();
     }
 
-    private void addTests() { // TODO: метод дабовляющий станции
+    public static void addStation() { // TODO: метод дабовляющий станции
 
             stations.add(new StationDraw(StationLogic.getRandomShape()));
         }
 
 
-    @Override // TODO: переосдресация метода onDraw. исует все станции из массива
+    @Override // TODO: переосдресация метода onDraw. рисует все станции из массива
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         for (StationDraw station : stations) {
