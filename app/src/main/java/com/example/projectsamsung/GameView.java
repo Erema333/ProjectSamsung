@@ -12,6 +12,9 @@ import java.util.List;
 
 public class GameView extends View {
     private static ArrayList<StationDraw> stations = new ArrayList<>(); // массив со всеми станциями
+    static ArrayList CordX = new ArrayList();
+    static ArrayList CordY = new ArrayList();
+
 
     public GameView(Context context, @Nullable AttributeSet attrs) {  // TODO: конструктор при вызови кторого добовляется станция
         super(context, attrs);

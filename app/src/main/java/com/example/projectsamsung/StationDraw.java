@@ -1,5 +1,7 @@
 package com.example.projectsamsung;
 
+import static com.example.projectsamsung.GameView.CordX;
+import static com.example.projectsamsung.GameView.CordY;
 import static com.example.projectsamsung.StationLogic.Shape.square;
 
 import android.graphics.Canvas;
@@ -19,8 +21,6 @@ public class StationDraw {
     public Float y;
     int l = 0;
     public StationLogic.Shape shape; // фигура станции
-ArrayList CordX = new ArrayList();
-    ArrayList CordY = new ArrayList();
 
 
     private final Paint paint = new Paint();
@@ -39,7 +39,7 @@ public void CordTestY(){
         //==========================================
         for (int i = 0; i < CordY.size(); i++) {
             if (CordY.get(i) != null) {
-                if ((((float) CordY.get(i)) > y + 70) || ((float) CordY.get(i) < y - 70)) {
+                if ((((float) CordY.get(i)) > y + 30) || ((float) CordY.get(i) < y - 30)) {
                     g++;
 
                 } else break;
@@ -57,11 +57,12 @@ public void CordTestX(){
         while (g != -5) {
             g = 0;
             x = (float) (Math.random() * (1000 - 30) + 30);
+            System.out.println(x);
             Collections.sort(CordX);
             //==========================================
             for (int i = 0; i < CordX.size(); i++) {
                 if (CordX.get(i) != null) {
-                    if ((((float) CordX.get(i)) > x + 70) || ((float) CordX.get(i) < x - 70)) {
+                    if ((((float) CordX.get(i)) > x + 30) || ((float) CordX.get(i) < x - 30)) {
                         g++;
 
                     } else break;
@@ -91,7 +92,7 @@ public void CordTestX(){
 
         switch (shape) { // выбор рисования станции в зависимости от фигуры
             case square:
-                canvas.drawRect(x - RADIUS-10, y - RADIUS-10, x + RADIUS-10, y + RADIUS-10, paint);
+                canvas.drawRect(x - RADIUS-15, y - RADIUS-15, x + RADIUS-15, y + RADIUS-15, paint);
                 break;
             case circle:
                 canvas.drawCircle(x, y, RADIUS, paint);
