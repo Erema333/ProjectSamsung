@@ -2,8 +2,9 @@ package com.example.projectsamsung;
 
 import static com.example.projectsamsung.GameView.CordX;
 import static com.example.projectsamsung.GameView.CordY;
-import static com.example.projectsamsung.StationLogic.Shape.square;
 
+import static com.example.projectsamsung.StationLogic.Shape.square;
+import static com.example.projectsamsung.StationLogic.num;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -19,7 +20,6 @@ public class StationDraw {
     public int level = 0;// уровень станции
     public Float x;
     public Float y;
-    int l = 0;
     public StationLogic.Shape shape; // фигура станции
 
 
@@ -30,63 +30,18 @@ public class StationDraw {
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setColor(Color.BLACK);
     }
-public void CordTestY(){
-        int g = 0;
-    while (g != -5) {
-        g = 0;
-        y = (float) (Math.random() * (2000 - 30) + 30);
-        Collections.sort(CordY);
-        //==========================================
-        for (int i = 0; i < CordY.size(); i++) {
-            if (CordY.get(i) != null) {
-                if ((((float) CordY.get(i)) > y + 30) || ((float) CordY.get(i) < y - 30)) {
-                    g++;
 
-                } else break;
-            }
-        }
-        //=======================================
-        if (g == CordY.size()) g = -5;
-        CordY.add(y);
-    }
-
-
-}
-public void CordTestX(){
-        int g = 0;
-        while (g != -5) {
-            g = 0;
-            x = (float) (Math.random() * (1000 - 30) + 30);
-            System.out.println(x);
-            Collections.sort(CordX);
-            //==========================================
-            for (int i = 0; i < CordX.size(); i++) {
-                if (CordX.get(i) != null) {
-                    if ((((float) CordX.get(i)) > x + 30) || ((float) CordX.get(i) < x - 30)) {
-                        g++;
-
-                    } else break;
-                }
-            }
-            //=======================================
-            if (g == CordX.size()) g = -5;
-            CordX.add(x);
-        }
-
-
-    }
 
     public void onDraw(Canvas canvas) {  //todo: Рисует станции
-        if(x == null){
-            CordTestX();
+        if(x == null && y == null){
 
-           
+
+x = (float) CordX[num];
+y = (float) CordY[num];
+num++;
+
         }
-        if(y == null){
-            CordTestY();
 
-
-            }
 
 
 

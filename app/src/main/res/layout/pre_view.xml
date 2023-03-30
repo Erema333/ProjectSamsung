@@ -11,8 +11,7 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:background="@drawable/backqround"
-       android:layout_gravity="center"
-       />
+       android:layout_gravity="center"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,9 +23,9 @@
         <Button
             android:id="@+id/cont"
             android:layout_width="match_parent"
-            android:layout_height="0.4in"
+            android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginHorizontal="0.5in"
+            android:layout_marginHorizontal="80dp"
             android:backgroundTint="@color/white"
             android:gravity="center"
             android:text="Продолжить"
@@ -36,9 +35,9 @@
         <Button
             android:id="@+id/new_game"
             android:layout_width="match_parent"
-            android:layout_height="0.4in"
-            android:layout_marginHorizontal="0.5in"
-            android:layout_marginVertical="0.1in"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="80dp"
+            android:layout_marginVertical="35dp"
             android:backgroundTint="@color/white"
             android:gravity="center"
             android:text="Новая игра"

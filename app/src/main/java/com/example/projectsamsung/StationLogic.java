@@ -1,5 +1,8 @@
 package com.example.projectsamsung;
 
+import static com.example.projectsamsung.GameView.CordX;
+import static com.example.projectsamsung.GameView.CordY;
+
 import android.app.SearchManager;
 
 import java.lang.reflect.Array;
@@ -9,11 +12,16 @@ import com.google.android.material.slider.Slider;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class StationLogic {
+    public static float x;
+    public static float y;
+public static int num =0;
     public enum Shape { // список всех фигур
         circle, triangle, square
+
     }
 
 
@@ -28,6 +36,40 @@ public class StationLogic {
                 return Shape.triangle;
         }
     }
+
+   /* public static void CordTest(){
+        int g = 0;
+        while (g != -5) {
+            g = 0;
+            y = (float) (Math.random() * (2000 - 30) + 30);
+
+            x = (float) (Math.random() * (1000 - 30) + 30);
+            Collections.sort(CordY);
+            Collections.sort(CordX);
+
+            //==========================================
+            for (int i = 0; i < CordY.size(); i++) {
+                if (CordY.get(i) != null) {
+                    if ((((float) CordY.get(i)+ 40 > y ) || ((float) CordY.get(i)- 40 < y ))||
+                            (((float) CordX.get(i)+ 40 > x ) || ((float) CordX.get(i)- 40 < x ))) {
+                        g++;h
+                        System.out.println(x + " "+ y);
+
+                    } else break;
+                }
+            }
+            //===========================================
+            if (g == CordY.size()) {
+                g = -5;
+
+                CordY.add(y);
+                CordX.add(x);
+            }
+        }
+
+
+
+    }*/
 
 
 }
