@@ -1,7 +1,11 @@
 package com.example.projectsamsung;
 
+import static com.example.projectsamsung.GameActivity.getCordX;
+import static com.example.projectsamsung.GameActivity.getCordY;
+import static com.example.projectsamsung.GameActivity.updateGame;
 import static com.example.projectsamsung.GameView.CordX;
 import static com.example.projectsamsung.GameView.CordY;
+import static com.example.projectsamsung.GameView.stations;
 
 import android.app.SearchManager;
 
@@ -18,7 +22,6 @@ import java.util.List;
 public class StationLogic {
     public static float x;
     public static float y;
-public static int num =0;
     public enum Shape { // список всех фигур
         circle, triangle, square
 
@@ -26,15 +29,26 @@ public static int num =0;
 
 
     public static Shape getRandomShape() {//TODO: метод возращающий рандомную фигуру из списка
-        int a = (int) (Math.random() * 2) + 1;
+        int a = (int) (Math.random() * 3) + 1;
         switch (a) {
             case 1:
                 return Shape.circle;
             case 2:
                 return Shape.square;
-            default:
+            case 3:
                 return Shape.triangle;
         }
+        return Shape.triangle;
+    }
+    public static boolean onTouchSprite(){
+        for (StationDraw mas:GameView.stations) {
+            if((mas.SpriteX < getCordX()+10||mas.SpriteX > getCordX()-10||mas.SpriteX == getCordX())&&(mas.SpriteY < getCordY()+10||mas.SpriteY > getCordY()-10||mas.SpriteY == getCordY())){
+                stations.remove(mas);
+                updateGame();
+                return true;
+            }
+        }
+        return false;
     }
 
    /* public static void CordTest(){

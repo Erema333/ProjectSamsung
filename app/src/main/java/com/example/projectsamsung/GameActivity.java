@@ -2,7 +2,17 @@ package com.example.projectsamsung;
 
 import static android.app.PendingIntent.getActivity;
 import static android.os.SystemClock.sleep;
+import static com.example.projectsamsung.StationLogic.onTouchSprite;
 
+import android.content.Context;
+import android.graphics.Canvas;
+import android.util.AttributeSet;
+import android.view.View;
+
+import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,12 +20,11 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
-
+import android.graphics.Canvas;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectsamsung.databinding.GameViewBinding;
-
 
 import java.util.Calendar;
 import java.util.Date;
@@ -26,8 +35,8 @@ import java.util.TreeMap;
 public class GameActivity extends AppCompatActivity {
     Date dt = Calendar.getInstance().getTime();
 long time;
-
-    private GameViewBinding binding;
+long nextTimeSt;
+    private static GameViewBinding binding;
     private static double x,y; // координаты нажатия
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -36,14 +45,16 @@ long time;
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
         time = 0;
+        nextTimeSt = 120;
         binding.display.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) { /* TODO: при нажатии получаются координаты нажатия и
                                                                    TODO: **вызывается обновление холста** */
-               GameView.addStation();
+                onTouchSprite();
                 x = event.getX();
                 y = event.getY();
                 binding.game.invalidate();
+
                 return false;
             }
 
@@ -55,15 +66,19 @@ long time;
         TimeTheard time = new TimeTheard();
         time.start();
     }
+    public static void updateGame(){
+        binding.game.invalidate();
+    }
     //=========================================================
 public class TimeTheard extends Thread{
         @Override
         public void run() {
             super.run();
-            while (true){
+            while (time < 1679){
                 binding.timeView.setText("time: " + time);
                 try {
                     Thread.sleep(1000);
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -83,7 +98,7 @@ public class TimeTheard extends Thread{
     public static double getCordX(){
         return x;
     } // методы возращающие координаты нажатия
-    public double getCordY(){
+    public static double getCordY(){
         return y;
     }
 };

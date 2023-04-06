@@ -22,6 +22,13 @@ public class PreviewActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        binding.newGame.setOnClickListener(view -> { // TODO: смена активити после нажатия на кнопку "продолжить", через интент
+            Intent intent = new Intent();
+
+            intent.setClass(PreviewActivity.this, GameActivity.class);
+            startActivity(intent);
+        });
     }
+
 
 }
