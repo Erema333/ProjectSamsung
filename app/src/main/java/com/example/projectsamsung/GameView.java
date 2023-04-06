@@ -8,7 +8,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class GameView extends View {
     public static ArrayList<SpriteDraw> stations = new ArrayList<>(); // массив со всеми станциями

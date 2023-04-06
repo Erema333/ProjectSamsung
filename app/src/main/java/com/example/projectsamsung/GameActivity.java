@@ -1,42 +1,30 @@
 package com.example.projectsamsung;
 
-import static android.app.PendingIntent.getActivity;
-import static android.os.SystemClock.sleep;
+
 import static com.example.projectsamsung.GameView.addSprite;
 import static com.example.projectsamsung.SpriteLogic.onTouchSprite;
+import static com.example.projectsamsung.SpriteLogic.score;
 
-import android.content.Context;
-import android.graphics.Canvas;
-import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.SystemClock;
+
 import android.view.MotionEvent;
-import android.view.View;
-import android.graphics.Canvas;
-import androidx.annotation.Nullable;
+
+
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectsamsung.databinding.GameViewBinding;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TreeMap;
 
 
 // TODO: Класс для оброботки взаимодействий пользователя || Основная активити
 public class GameActivity extends AppCompatActivity {
-    Date dt = Calendar.getInstance().getTime();
 long time;
-long nextTimeSt;
     private static GameViewBinding binding;
     private static double x,y; // координаты нажатия
     @SuppressLint("ClickableViewAccessibility")
@@ -68,7 +56,7 @@ long nextTimeSt;
     }
     public static void updateGame(){
         binding.game.invalidate();
-    }
+    } // TODO: метод обновляющий холст
     //=========================================================
 public class TimeTheard extends Thread{
         @Override
@@ -76,6 +64,7 @@ public class TimeTheard extends Thread{
             super.run();
             while (time > 0){
                 binding.timeView.setText("time: " + time);
+                binding.score.setText("score: " + score);
                 addSprite();
                 binding.game.invalidate();
                 try {
@@ -89,13 +78,6 @@ public class TimeTheard extends Thread{
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-
-
-    }
 
     public static double getCordX(){
         return x;

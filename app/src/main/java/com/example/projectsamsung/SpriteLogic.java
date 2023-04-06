@@ -8,7 +8,8 @@ import static com.example.projectsamsung.GameView.stations;
 public class SpriteLogic {
     public static float x;
     public static float y;
-    public enum Shape { // список всех фигур
+    public static int score = 0;
+    public enum Shape { // список всех картинок
         Yna, Heh, Masha
 
     }
@@ -26,10 +27,11 @@ public class SpriteLogic {
         }
         return Shape.Masha;
     }
-    public static boolean onTouchSprite(){
+    public static boolean onTouchSprite(){ // TODO: массив удаляющий спрайт если на него нажали
         for (SpriteDraw mas:GameView.stations) {
-            if((mas.SpriteX < getCordX()+10||mas.SpriteX > getCordX()-10||mas.SpriteX == getCordX())&&(mas.SpriteY < getCordY()+10||mas.SpriteY > getCordY()-10||mas.SpriteY == getCordY())){
+            if((mas.SpriteX > getCordX()+3||mas.SpriteX < getCordX()-3||mas.SpriteX == getCordX())&&(mas.SpriteY > getCordY()+3||mas.SpriteY < getCordY()-3||mas.SpriteY == getCordY())){
                 stations.remove(mas);
+                score++;
                 updateGame();
                 return true;
             }
