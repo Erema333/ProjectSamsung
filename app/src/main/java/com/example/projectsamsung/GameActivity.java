@@ -2,7 +2,8 @@ package com.example.projectsamsung;
 
 import static android.app.PendingIntent.getActivity;
 import static android.os.SystemClock.sleep;
-import static com.example.projectsamsung.StationLogic.onTouchSprite;
+import static com.example.projectsamsung.GameView.addSprite;
+import static com.example.projectsamsung.SpriteLogic.onTouchSprite;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -44,8 +45,7 @@ long nextTimeSt;
         binding = GameViewBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-        time = 0;
-        nextTimeSt = 120;
+        time = 300;
         binding.display.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) { /* TODO: при нажатии получаются координаты нажатия и
@@ -74,15 +74,17 @@ public class TimeTheard extends Thread{
         @Override
         public void run() {
             super.run();
-            while (time < 1679){
+            while (time > 0){
                 binding.timeView.setText("time: " + time);
+                addSprite();
+                binding.game.invalidate();
                 try {
                     Thread.sleep(1000);
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                time ++;
+                time --;
             }
         }
     }

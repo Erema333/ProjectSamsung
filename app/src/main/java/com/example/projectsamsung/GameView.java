@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameView extends View {
-    public static ArrayList<StationDraw> stations = new ArrayList<>(); // массив со всеми станциями
+    public static ArrayList<SpriteDraw> stations = new ArrayList<>(); // массив со всеми станциями
     static int[] CordX = {500, 700, 386,458,567,300,342,740,800,200,253,300,635,543,800};
     static int[] CordY = {1800, 800, 200,563,348,1000,1254,638,1300,1600,400,700,1500,1550,1123};
 
@@ -19,17 +19,17 @@ public class GameView extends View {
 
     public GameView(Context context, @Nullable AttributeSet attrs) {  // TODO: конструктор при вызови кторого добовляется станция
         super(context, attrs);
-        addStation();
-        addStation();
+        addSprite();
+        addSprite();
 
 
     }
     public static void removeStation() {
 
     }
-    public static void addStation() { // TODO: метод дабовляющий станции
+    public static void addSprite() { // TODO: метод дабовляющий станции
 
-            stations.add(new StationDraw(StationLogic.getRandomShape()));
+            stations.add(new SpriteDraw(SpriteLogic.getRandomShape()));
         }
 
 
@@ -37,7 +37,7 @@ public class GameView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawColor(-1);
-        for (StationDraw station : stations) {
+        for (SpriteDraw station : stations) {
             station.onDraw(canvas);
         }
     }

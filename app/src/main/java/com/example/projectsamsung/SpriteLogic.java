@@ -3,27 +3,13 @@ package com.example.projectsamsung;
 import static com.example.projectsamsung.GameActivity.getCordX;
 import static com.example.projectsamsung.GameActivity.getCordY;
 import static com.example.projectsamsung.GameActivity.updateGame;
-import static com.example.projectsamsung.GameView.CordX;
-import static com.example.projectsamsung.GameView.CordY;
 import static com.example.projectsamsung.GameView.stations;
 
-import android.app.SearchManager;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
-import com.google.android.material.slider.Slider;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-public class StationLogic {
+public class SpriteLogic {
     public static float x;
     public static float y;
     public enum Shape { // список всех фигур
-        circle, triangle, square
+        Yna, Heh, Masha
 
     }
 
@@ -32,16 +18,16 @@ public class StationLogic {
         int a = (int) (Math.random() * 3) + 1;
         switch (a) {
             case 1:
-                return Shape.circle;
+                return Shape.Yna;
             case 2:
-                return Shape.square;
+                return Shape.Heh;
             case 3:
-                return Shape.triangle;
+                return Shape.Masha;
         }
-        return Shape.triangle;
+        return Shape.Masha;
     }
     public static boolean onTouchSprite(){
-        for (StationDraw mas:GameView.stations) {
+        for (SpriteDraw mas:GameView.stations) {
             if((mas.SpriteX < getCordX()+10||mas.SpriteX > getCordX()-10||mas.SpriteX == getCordX())&&(mas.SpriteY < getCordY()+10||mas.SpriteY > getCordY()-10||mas.SpriteY == getCordY())){
                 stations.remove(mas);
                 updateGame();
