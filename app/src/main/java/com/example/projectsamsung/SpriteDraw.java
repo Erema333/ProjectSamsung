@@ -34,8 +34,8 @@ public class SpriteDraw {
         if(SpriteX == null && SpriteY == null){
 
 
-            SpriteX = (float) CordX[(int)(Math.random())];
-            SpriteY = (float) CordY[(int)(Math.random())];
+            SpriteX = (int) CordX[(int)(Math.random())];
+            SpriteY = (int) CordY[(int)(Math.random())];
 
         }
 

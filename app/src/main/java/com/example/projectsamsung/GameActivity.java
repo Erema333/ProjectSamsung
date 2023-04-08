@@ -25,6 +25,7 @@ import com.example.projectsamsung.databinding.GameViewBinding;
 // TODO: Класс для оброботки взаимодействий пользователя || Основная активити
 public class GameActivity extends AppCompatActivity {
 long time;
+    int next;
     private static GameViewBinding binding;
     private static double x,y; // координаты нажатия
     @SuppressLint("ClickableViewAccessibility")
@@ -34,6 +35,7 @@ long time;
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
         time = 300;
+        next = 10;
         binding.display.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) { /* TODO: при нажатии получаются координаты нажатия и
@@ -65,8 +67,11 @@ public class TimeTheard extends Thread{
             while (time > 0){
                 binding.timeView.setText("time: " + time);
                 binding.score.setText("score: " + score);
-                addSprite();
-                binding.game.invalidate();
+                if(300 - next == time) {
+                    addSprite();
+                    binding.game.invalidate();
+                    next+=10;
+                }
                 try {
                     Thread.sleep(1000);
 

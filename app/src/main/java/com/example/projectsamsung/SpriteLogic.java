@@ -29,7 +29,8 @@ public class SpriteLogic {
     }
     public static boolean onTouchSprite(){ // TODO: массив удаляющий спрайт если на него нажали
         for (SpriteDraw mas:GameView.stations) {
-            if((mas.SpriteX > getCordX()+3||mas.SpriteX < getCordX()-3||mas.SpriteX == getCordX())&&(mas.SpriteY > getCordY()+3||mas.SpriteY < getCordY()-3||mas.SpriteY == getCordY())){
+            if(((mas.SpriteX < getCordX()&&mas.SpriteX > getCordX()-30)||mas.SpriteX > getCordX()&&mas.SpriteX < getCordX()+30)
+             &&((mas.SpriteY < getCordY()&&mas.SpriteY > getCordY()-30)||mas.SpriteY > getCordY()&&mas.SpriteY < getCordY()+30) ){
                 stations.remove(mas);
                 score++;
                 updateGame();
