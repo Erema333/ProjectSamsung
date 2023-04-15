@@ -35,16 +35,17 @@ long time;
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
         time = 300;
-        next = 10;
+        next = 3;
         binding.display.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) { /* TODO: при нажатии получаются координаты нажатия и
                                                                    TODO: **вызывается обновление холста** */
-                onTouchSprite();
+
                 x = event.getX();
                 y = event.getY();
                 binding.game.invalidate();
-
+                onTouchSprite();
+                System.out.println("нажал!");
                 return false;
             }
 
@@ -70,7 +71,7 @@ public class TimeTheard extends Thread{
                 if(300 - next == time) {
                     addSprite();
                     binding.game.invalidate();
-                    next+=10;
+                    next+=3;
                 }
                 try {
                     Thread.sleep(1000);
@@ -78,8 +79,9 @@ public class TimeTheard extends Thread{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                time --;
+            time--;
             }
+            super.stop();
         }
     }
 
@@ -90,4 +92,10 @@ public class TimeTheard extends Thread{
     public static double getCordY(){
         return y;
     }
-};
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+}

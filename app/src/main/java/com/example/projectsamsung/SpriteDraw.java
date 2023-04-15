@@ -7,14 +7,16 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-
-
+import static com.example.projectsamsung.SpriteLogic.x;
+import static com.example.projectsamsung.SpriteLogic.y;
 // Класс который рисует на холсте станции
 public class SpriteDraw {
     private final static float RADIUS = 30; // размер станции
     public int level = 0;// уровень станции
-    public static Float SpriteX;
-    public static Float SpriteY;
+    public  Float SpriteX;
+    public  Float SpriteY;
+
+
     public SpriteLogic.Shape shape; // фигура станции
 
 
@@ -34,8 +36,10 @@ public class SpriteDraw {
         if(SpriteX == null && SpriteY == null){
 
 
-            SpriteX = (int) CordX[(int)(Math.random())];
-            SpriteY = (int) CordY[(int)(Math.random())];
+            SpriteX = (float)(Math.random()*700)+300;
+            SpriteY = (float)(Math.random()*1700)+300;
+            x = SpriteX;
+            y = SpriteY;
 
         }
 

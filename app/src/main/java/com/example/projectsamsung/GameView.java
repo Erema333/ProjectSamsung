@@ -20,7 +20,6 @@ public class GameView extends View {
     public GameView(Context context, @Nullable AttributeSet attrs) {  // TODO: конструктор при вызови кторого добовляется станция
         super(context, attrs);
         addSprite();
-        addSprite();
 
 
     }

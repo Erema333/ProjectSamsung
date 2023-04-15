@@ -29,6 +29,9 @@ public class SpriteLogic {
     }
     public static boolean onTouchSprite(){ // TODO: массив удаляющий спрайт если на него нажали
         for (SpriteDraw mas:GameView.stations) {
+            System.out.println("x:" + mas.SpriteX+"spX:"+ getCordX());
+            System.out.println("y:" + mas.SpriteY+"spY:"+ getCordY());
+            System.out.println(stations.size());
             if(((mas.SpriteX < getCordX()&&mas.SpriteX > getCordX()-30)||mas.SpriteX > getCordX()&&mas.SpriteX < getCordX()+30)
              &&((mas.SpriteY < getCordY()&&mas.SpriteY > getCordY()-30)||mas.SpriteY > getCordY()&&mas.SpriteY < getCordY()+30) ){
                 stations.remove(mas);
@@ -40,7 +43,28 @@ public class SpriteLogic {
         return false;
     }
 
-   /* public static void CordTest(){
+
+
+       /* for (int i = 0; i < stations.size(); i++) {
+            System.out.println("x:" + x+"spX:"+ getCordX());
+            System.out.println("y:" + y+"spY:"+ getCordY());
+            System.out.println(stations.size());
+            if (stations.get(i) != null){
+            if(((x < getCordX()&&x > getCordX()-30)||x > getCordX()&&x < getCordX()+30)
+             &&((y < getCordY()&&y > getCordY()-30)||y > getCordY()&&y < getCordY()+30) ){
+                System.out.println("попал!");
+                stations.remove(i);
+
+                updateGame();
+                return true;
+            }}
+        }
+
+        return false;
+*/
+
+/*
+   public static void CordTest(){
         int g = 0;
         while (g != -5) {
             g = 0;
