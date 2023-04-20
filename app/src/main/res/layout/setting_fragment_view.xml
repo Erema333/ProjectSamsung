@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageButton
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginVertical="100dp"
+        android:layout_marginHorizontal="150dp"
+        android:layout_gravity="start"/>
+    <ImageButton
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginVertical="300dp"
+        android:layout_marginHorizontal="150dp"
+        android:layout_gravity="start"/>
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="75dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginVertical="100dp"
+        android:layout_marginHorizontal="150dp"
+        android:text="ПРОДОЛЖИТЬ"/>
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="75dp"
+        android:layout_gravity="bottom|start"
+        android:layout_marginVertical="100dp"
+        android:layout_marginHorizontal="150dp"
+        android:text="ВЫХОД"/>
+
+
+</FrameLayout>

@@ -13,7 +13,10 @@ public class SpriteLogic {
         Yna, Heh, Masha
 
     }
-
+public static void getDeleteSprite(){
+stations.remove(0);
+updateGame();
+}
 
     public static Shape getRandomShape() {//TODO: метод возращающий рандомную фигуру из списка
         int a = (int) (Math.random() * 3) + 1;
