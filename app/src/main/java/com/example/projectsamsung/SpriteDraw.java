@@ -3,14 +3,48 @@ package com.example.projectsamsung;
 import static com.example.projectsamsung.GameView.CordX;
 import static com.example.projectsamsung.GameView.CordY;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import static com.example.projectsamsung.SpriteLogic.x;
 import static com.example.projectsamsung.SpriteLogic.y;
+
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.os.Bundle;
+import android.view.View;
 // Класс который рисует на холсте станции
+//====================================================================================
 public class SpriteDraw {
+    public static class Drawdyse extends View {
+
+        Paint paint;
+        Bitmap bitmapSource;
+        static Bitmap  dyse;
+        Matrix matrix;
+
+        public Drawdyse(Context context) {
+            super(context);
+            paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+            bitmapSource = BitmapFactory.decodeResource(getResources(), R.drawable.dyyyyyyse);
+
+            matrix = new Matrix();
+            matrix.postScale(10, 15);
+            matrix.postRotate(45);
+
+            dyse = Bitmap.createBitmap(bitmapSource, 0, 0, bitmapSource.getWidth()/2, bitmapSource.getHeight()/2, matrix, true);
+
+        }}
+        //=============================================================================================
     private final static float RADIUS = 30; // размер станции
     public int level = 0;// уровень станции
     public  Float SpriteX;
@@ -54,15 +88,17 @@ public class SpriteDraw {
                 canvas.drawCircle(SpriteX, SpriteY, RADIUS, paint);
                 break;
             case Masha:
-                path.moveTo(SpriteX, SpriteY);
-                path.lineTo(SpriteX - 37, SpriteY - 80);
-                path.lineTo(SpriteX - 80, SpriteY);
-                path.lineTo(SpriteX, SpriteY);
-                path.close();
-                canvas.drawPath(path, paint);
-                break;
+
+                 if(Drawdyse.dyse != null)   canvas.drawBitmap(Drawdyse.dyse, (int) (x), (int) (y), paint);
+                 else {
+                     paint.setColor(Color.RED);
+                     canvas.drawRect(SpriteX - RADIUS-15, SpriteY - RADIUS-15, SpriteX + RADIUS-15, SpriteY + RADIUS-15, paint);
+                     break;
+                 }
+                 }
+
 
         }
     }
 
-}
+
