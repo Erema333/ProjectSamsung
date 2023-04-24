@@ -3,7 +3,6 @@ package com.example.projectsamsung;
 import static com.example.projectsamsung.GameActivity.getCordX;
 import static com.example.projectsamsung.GameActivity.getCordY;
 import static com.example.projectsamsung.GameActivity.updateGame;
-import static com.example.projectsamsung.GameView.stations;
 
 public class SpriteLogic {
     public static float x;
@@ -14,7 +13,7 @@ public class SpriteLogic {
 
     }
 public static void getDeleteSprite(){
-stations.remove(0);
+//stations.remove(0);
 updateGame();
 }
 
@@ -30,7 +29,7 @@ updateGame();
         }
         return Shape.Masha;
     }
-    public static boolean onTouchSprite(){ // TODO: массив удаляющий спрайт если на него нажали
+    public boolean onTouchSprite(){ // TODO: массив удаляющий спрайт если на него нажали
         for (SpriteDraw mas:GameView.stations) {
             System.out.println("x:" + mas.SpriteX+"spX:"+ getCordX());
             System.out.println("y:" + mas.SpriteY+"spY:"+ getCordY());

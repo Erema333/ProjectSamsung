@@ -1,7 +1,6 @@
 package com.example.projectsamsung;
 
 
-import static com.example.projectsamsung.GameView.addSprite;
 import static com.example.projectsamsung.SpriteLogic.onTouchSprite;
 import static com.example.projectsamsung.SpriteLogic.score;
 
@@ -81,7 +80,7 @@ public class TimeTheard extends Thread{
                 binding.timeView.setText("time: " + time);
                 binding.score.setText("score: " + score);
                 if(300 - next == time) {
-                    addSprite();
+                    //addSprite();
                     binding.game.invalidate();
                     next+=1;
                     if(time % 3 == 0)SpriteLogic.getDeleteSprite();
