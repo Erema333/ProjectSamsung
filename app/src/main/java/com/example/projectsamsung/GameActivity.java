@@ -1,113 +1,39 @@
 package com.example.projectsamsung;
 
-
-import static com.example.projectsamsung.GameView.sprites;
-import static com.example.projectsamsung.SpriteLogic.score;
-
-import android.view.View;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import android.view.MotionEvent;
-
-
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.projectsamsung.databinding.GameViewBinding;
 
 
 
-// TODO: Класс для оброботки взаимодействий пользователя || Основная активити
+// Класс для оброботки взаимодействий пользователя || Основная активити
 public class GameActivity extends AppCompatActivity {
+    private GameViewBinding binding;
 
-
-
-    long time;
-    int next;
-    private static GameViewBinding binding;
-    private static double x,y; // координаты нажатия
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-
         binding = GameViewBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-        time = 300;
-        next = 3;
+
         binding.setting.setOnClickListener(v -> {
             SettingGameFragmet fragment = new SettingGameFragmet();
             getSupportFragmentManager().beginTransaction().replace(R.id.setting_layout, fragment).commit();
         });
-        binding.display.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) { /* DO: при нажатии получаются координаты нажатия и
-                                                                   DO: **вызывается обновление холста** */
-
-                x = event.getX();
-                y = event.getY();
-                binding.game.invalidate();
-                System.out.println("нажал!");
-                return false;
-            }
-
-        });
-        // DO: бработка нажатия на кнопку настройки
-        binding.setting.setOnClickListener(v -> {
-
-        });
-        TimeTheard time = new TimeTheard();
-        time.start();
-    }
-    public void updateGame(){
-        binding.game.invalidate();
-    } // DO: метод обновляющий холст
-    //=========================================================
-public class TimeTheard extends Thread{
-        @Override
-        public void run() {
-
-            super.run();
-            while (time > 0){
-
-                binding.timeView.setText("time: " + time);
-                binding.score.setText("score: " + score);
-                if(300 - next == time) {
-sprites.add(new BitmapSprite(getApplicationContext()));
-                    binding.game.invalidate();
-                    next+=1;
-                    if(time % 3 == 0)SpriteLogic.getDeleteSprite();
-
-                }
-                try {
-                    Thread.sleep(1000);
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            time--;
-            }
-            super.stop();
-        }
     }
 
-
-    public static double getCordX(){
-        return x;
-    } // методы возращающие координаты нажатия
-    public static double getCordY(){
-        return y;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        binding.game.onResume();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-
+        binding.game.onStop();
     }
 }

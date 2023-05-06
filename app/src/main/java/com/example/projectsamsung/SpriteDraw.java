@@ -49,17 +49,6 @@ public class SpriteDraw {
             y = SpriteY;
 
         }
-
-        switch (shape) { // выбор рисования станции в зависимости от фигуры
-            case Yna:
-                canvas.drawRect(SpriteX - RADIUS - 15, SpriteY - RADIUS - 15, SpriteX + RADIUS - 15, SpriteY + RADIUS - 15, paint);
-                break;
-            case Heh:
-                canvas.drawCircle(SpriteX, SpriteY, RADIUS, paint);
-                break;
-        }
-
-
     }
 }
 

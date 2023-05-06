@@ -2,7 +2,6 @@ package com.example.projectsamsung;
 
 import static com.example.projectsamsung.SpriteLogic.x;
 import static com.example.projectsamsung.SpriteLogic.y;
-import static com.example.projectsamsung.GameView.sprites;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,7 +15,7 @@ public class BitmapSprite extends SpriteDraw {
     Bitmap bitmapSource;
     Bitmap  dyse;
     Matrix matrix;
-SpriteLogic.Shape shape;
+    SpriteLogic.Shape shape;
     public BitmapSprite(Context context) {
 
         this.shape = getRandomShape();

@@ -2,41 +2,100 @@ package com.example.projectsamsung;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+
+import com.example.projectsamsung.sprite.CubeSprite;
+import com.example.projectsamsung.sprite.Sprite;
 
 import java.util.ArrayList;
 
 
 public class GameView extends View {
-    public static ArrayList<BitmapSprite> sprites = new ArrayList<>(); // массив со всеми станциями
-    static int[] CordX = {500, 700, 386, 458, 567, 300, 342, 740, 800, 200, 253, 300, 635, 543, 800};
-    static int[] CordY = {1800, 800, 200, 563, 348, 1000, 1254, 638, 1300, 1600, 400, 700, 1500, 1550, 1123};
+    private final ArrayList<Sprite> sprites = new ArrayList<>(); // массив со всеми станциями
+    private Thread generateSprite; // TODO: перенести на таймер обратного отсчёта
 
-
-    public GameView(Context context, @Nullable AttributeSet attrs) {  // TODO: конструктор при вызови кторого добовляется станция
+    // конструктор при вызове которого добавляется станция
+    public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        sprites.add(new BitmapSprite(getContext()));
-
-
     }
 
-
-    public void removeStation() {
-
+    public void onResume() {
+        generateSprite = new GenerateSpriteThread();
+        generateSprite.start();
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float touchX = event.getX();
+        float touchY = event.getY();
 
+        final ArrayList<Sprite> removeSprites = new ArrayList<>();
 
+        for (Sprite sprite : sprites) {
+            if (sprite.onTouchSprite(touchX, touchY)) {
+                removeSprites.add(sprite);
+            }
+        }
 
-    @Override // TODO: переопределение метода onDraw. рисует все станции из массива
+        sprites.removeAll(removeSprites);
+        if(removeSprites.size() > 0) invalidate();
+
+        return true;
+    }
+
+    // переопределение метода onDraw. рисует все станции из массива
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawColor(-1);
-        for (SpriteDraw station : sprites) {
-            station.onDraw(canvas);
+        canvas.drawColor(Color.WHITE);
+        for (Sprite sprite : sprites) {
+            sprite.onDraw(canvas);
+        }
+    }
+
+    public void onStop() {
+        generateSprite.interrupt();
+        try {
+            generateSprite.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addSprite() {
+        float x = (float) (Math.random() * getWidth());
+        float y = (float) (Math.random() * getHeight());
+        int random = (int) (Math.random() * 2);
+        switch (random) {
+            case 0:
+                sprites.add(new CubeSprite(x, y, 100f));
+                break;
+            case 1:
+                sprites.add(new CubeSprite(x, y, 50f)); // TODO: заменить на не куб
+                break;
+        }
+        invalidate();
+    }
+
+
+    private class GenerateSpriteThread extends Thread {
+        @Override
+        public void run() {
+
+            try {
+                while (!isInterrupted()) {
+                    Thread.sleep(2000);
+                    GameView.this.getHandler().post(GameView.this::addSprite);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
