@@ -2,7 +2,13 @@ package com.example.projectsamsung;
 
 import static com.example.projectsamsung.GameActivity.getCordX;
 import static com.example.projectsamsung.GameActivity.getCordY;
-import static com.example.projectsamsung.GameActivity.updateGame;
+import static com.example.projectsamsung.GameView.sprites;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.net.wifi.p2p.WifiP2pManager;
+
+import io.grpc.ServerCall;
 
 public class SpriteLogic {
     public static float x;
@@ -14,35 +20,27 @@ public class SpriteLogic {
     }
 public static void getDeleteSprite(){
 //stations.remove(0);
-updateGame();
+//updateGame();
 }
 
-    public static Shape getRandomShape() {//TODO: метод возращающий рандомную фигуру из списка
-        int a = (int) (Math.random() * 3) + 1;
-        switch (a) {
-            case 1:
-                return Shape.Yna;
-            case 2:
-                return Shape.Heh;
-            case 3:
-                return Shape.Masha;
-        }
-        return Shape.Masha;
-    }
-    public boolean onTouchSprite(){ // TODO: массив удаляющий спрайт если на него нажали
-        for (SpriteDraw mas:GameView.stations) {
+    /*public SpriteLogic(Context context){
+       sprites.add(new BitmapSprite(context,getRandomShape()));
+}*/
+
+    public SpriteDraw onTouchSprite(){ // DO: массив удаляющий спрайт если на него нажали
+        for (SpriteDraw mas: sprites) {
             System.out.println("x:" + mas.SpriteX+"spX:"+ getCordX());
             System.out.println("y:" + mas.SpriteY+"spY:"+ getCordY());
-            System.out.println(stations.size());
+            System.out.println(sprites.size());
             if(((mas.SpriteX < getCordX()&&mas.SpriteX > getCordX()-30)||mas.SpriteX > getCordX()&&mas.SpriteX < getCordX()+30)
              &&((mas.SpriteY < getCordY()&&mas.SpriteY > getCordY()-30)||mas.SpriteY > getCordY()&&mas.SpriteY < getCordY()+30) ){
-                stations.remove(mas);
+                sprites.remove(mas);
                 score++;
-                updateGame();
-                return true;
+               // updateGame();
+                return mas;
             }
         }
-        return false;
+        return null;
     }
 
 

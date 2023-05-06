@@ -1,7 +1,7 @@
 package com.example.projectsamsung;
 
 
-import static com.example.projectsamsung.SpriteLogic.onTouchSprite;
+import static com.example.projectsamsung.GameView.sprites;
 import static com.example.projectsamsung.SpriteLogic.score;
 
 import android.view.View;
@@ -47,28 +47,27 @@ public class GameActivity extends AppCompatActivity {
         });
         binding.display.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) { /* TODO: при нажатии получаются координаты нажатия и
-                                                                   TODO: **вызывается обновление холста** */
+            public boolean onTouch(View v, MotionEvent event) { /* DO: при нажатии получаются координаты нажатия и
+                                                                   DO: **вызывается обновление холста** */
 
                 x = event.getX();
                 y = event.getY();
                 binding.game.invalidate();
-                onTouchSprite();
                 System.out.println("нажал!");
                 return false;
             }
 
         });
-        // TODO: бработка нажатия на кнопку настройки
+        // DO: бработка нажатия на кнопку настройки
         binding.setting.setOnClickListener(v -> {
 
         });
         TimeTheard time = new TimeTheard();
         time.start();
     }
-    public static void updateGame(){
+    public void updateGame(){
         binding.game.invalidate();
-    } // TODO: метод обновляющий холст
+    } // DO: метод обновляющий холст
     //=========================================================
 public class TimeTheard extends Thread{
         @Override
@@ -80,7 +79,7 @@ public class TimeTheard extends Thread{
                 binding.timeView.setText("time: " + time);
                 binding.score.setText("score: " + score);
                 if(300 - next == time) {
-                    //addSprite();
+sprites.add(new BitmapSprite(getApplicationContext()));
                     binding.game.invalidate();
                     next+=1;
                     if(time % 3 == 0)SpriteLogic.getDeleteSprite();

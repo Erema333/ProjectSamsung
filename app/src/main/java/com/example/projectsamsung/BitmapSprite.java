@@ -2,7 +2,7 @@ package com.example.projectsamsung;
 
 import static com.example.projectsamsung.SpriteLogic.x;
 import static com.example.projectsamsung.SpriteLogic.y;
-
+import static com.example.projectsamsung.GameView.sprites;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,11 +16,12 @@ public class BitmapSprite extends SpriteDraw {
     Bitmap bitmapSource;
     Bitmap  dyse;
     Matrix matrix;
+SpriteLogic.Shape shape;
+    public BitmapSprite(Context context) {
 
-    public BitmapSprite(Context context, SpriteLogic.Shape shape) {
-        super(shape);
+        this.shape = getRandomShape();
+
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
         bitmapSource = BitmapFactory.decodeResource(context.getResources(), R.drawable.dyyyyyyse);
 
         matrix = new Matrix();
@@ -29,6 +30,21 @@ public class BitmapSprite extends SpriteDraw {
 
         dyse = Bitmap.createBitmap(bitmapSource, 0, 0, bitmapSource.getWidth()/2, bitmapSource.getHeight()/2, matrix, true);
     }
+    public SpriteLogic.Shape getRandomShape() {//DO: метод возращающий рандомную фигуру из списка
+        int a = (int) (Math.random() * 3) + 1;
+        switch (a) {
+            case 1:
+                return SpriteLogic.Shape.Yna;
+            case 2:
+                return SpriteLogic.Shape.Heh;
+            case 3:
+                return SpriteLogic.Shape.Masha;
+        }
+        return SpriteLogic.Shape.Masha;
+    }
+
+
+
 
     @Override
     public void onDraw(Canvas canvas) {
