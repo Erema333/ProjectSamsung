@@ -9,7 +9,7 @@ public class CircleSprite extends Sprite{
     private final Paint paint = new Paint();
     public CircleSprite(float x, float y, float width) {
         super(x, y);
-        radius = (int) (width / 15);
+        radius = (int) (width / 25000);
         paint.setColor(Color.BLACK);
     }
 

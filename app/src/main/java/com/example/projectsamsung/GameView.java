@@ -14,6 +14,7 @@ import com.example.projectsamsung.databinding.GameViewBinding;
 import com.example.projectsamsung.sprite.CircleSprite;
 import com.example.projectsamsung.sprite.CubeSprite;
 import com.example.projectsamsung.sprite.Sprite;
+import com.example.projectsamsung.sprite.SpriteVanish;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ public class GameView extends View {
     private GameViewBinding binding;
     public static GameInfo info = new GameInfo();
     private final ArrayList<Sprite> sprites = new ArrayList<>(); // массив со всеми станциями
+    final ArrayList<SpriteVanish> spriteVan = new ArrayList<>();
     private Thread generateSprite; // TODO: перенести на таймер обратного отсчёта
 
     // конструктор при вызове которого добавляется станция
@@ -79,19 +81,32 @@ public class GameView extends View {
         int random = (int) (Math.random() * 2);
         switch (random) {
             case 0:
-                sprites.add(new CubeSprite(x, y, 100f));
+                sprites.add(new CubeSprite(x, y, getWidth()*getHeight()));
+                spriteVan.add(new SpriteVanish(sprites.get(sprites.size()-1)));
                 break;
             case 1:
-                sprites.add(new CircleSprite(x,y,getWidth()));
+                sprites.add(new CircleSprite(x,y,getWidth()*getHeight()));
+                spriteVan.add(new SpriteVanish(sprites.get(sprites.size()-1)));
                 break;
         }
         invalidate();
     }
 
 
+private void MissSprites(){
+    for (SpriteVanish spr: spriteVan) {
+
+        if(spr.getIter() >= 2){
+            sprites.remove(spr.getSprite());
+            spriteVan.remove(spr);
+            invalidate();
+        }
+    }
+}
     private class GenerateSpriteThread extends Thread {
+
         int Time = 1500;
-        int iter = 0;
+        int iterT = 0;
         @Override
         public void run() {
 
@@ -99,9 +114,14 @@ public class GameView extends View {
                 while (!isInterrupted()) {
 
                     Thread.sleep(Time);
-                    if(iter == 5 && Time >= 300)iter =0;Time-=10;
+                    if(iterT == 5 && Time >= 300)iterT =0;Time-=10;
                     GameView.this.getHandler().post(GameView.this::addSprite);
-                    iter++;
+                    iterT++;
+                    for (SpriteVanish spr: spriteVan) {
+                        spr.addIter();
+
+                    }
+                    MissSprites();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

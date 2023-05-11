@@ -10,7 +10,7 @@ public class CubeSprite extends Sprite {
 
     public CubeSprite(float x, float y, float width) {
         super(x, y);
-        halfWidth = width / 2;
+        halfWidth = width / 25000;
         paint.setColor(Color.BLACK);
     }
 
