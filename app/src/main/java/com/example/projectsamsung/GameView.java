@@ -10,6 +10,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.example.projectsamsung.databinding.GameViewBinding;
+import com.example.projectsamsung.sprite.CircleSprite;
 import com.example.projectsamsung.sprite.CubeSprite;
 import com.example.projectsamsung.sprite.Sprite;
 
@@ -17,6 +19,8 @@ import java.util.ArrayList;
 
 
 public class GameView extends View {
+    private GameViewBinding binding;
+    public static GameInfo info = new GameInfo();
     private final ArrayList<Sprite> sprites = new ArrayList<>(); // массив со всеми станциями
     private Thread generateSprite; // TODO: перенести на таймер обратного отсчёта
 
@@ -40,6 +44,7 @@ public class GameView extends View {
         for (Sprite sprite : sprites) {
             if (sprite.onTouchSprite(touchX, touchY)) {
                 removeSprites.add(sprite);
+                info.addScore(1);
             }
         }
 
@@ -77,7 +82,7 @@ public class GameView extends View {
                 sprites.add(new CubeSprite(x, y, 100f));
                 break;
             case 1:
-                sprites.add(new CubeSprite(x, y, 50f)); // TODO: заменить на не куб
+                sprites.add(new CircleSprite(x,y,getWidth()));
                 break;
         }
         invalidate();
@@ -85,13 +90,18 @@ public class GameView extends View {
 
 
     private class GenerateSpriteThread extends Thread {
+        int Time = 1500;
+        int iter = 0;
         @Override
         public void run() {
 
             try {
                 while (!isInterrupted()) {
-                    Thread.sleep(2000);
+
+                    Thread.sleep(Time);
+                    if(iter == 5 && Time >= 300)iter =0;Time-=10;
                     GameView.this.getHandler().post(GameView.this::addSprite);
+                    iter++;
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

@@ -1,7 +1,8 @@
 package com.example.projectsamsung;
 
 public class GameInfo {
-    private int score;
+    private int score = 0;
+    private int missingSprite = 0;
     private int timeInSecond;
 
     public int getScore() {
@@ -11,7 +12,12 @@ public class GameInfo {
     public void addScore(int score) {
         this.score += score;
     }
-
+    public int getMissingSprite() {
+        return missingSprite;
+    }
+    public void addMissingSprite(int missingSprite) {
+        this.missingSprite += missingSprite;
+    }
     public int getTimeInSecond() {
         return timeInSecond;
     }

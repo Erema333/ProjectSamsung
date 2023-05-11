@@ -4,6 +4,7 @@
     android:id="@+id/display"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".GameActivity">
 
     <com.example.projectsamsung.GameView
@@ -11,12 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ImageButton
-        android:id="@+id/setting"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_gravity="start|top"
-        android:background="@drawable/set" />
 
 
     <TextView
@@ -29,6 +24,7 @@
         android:layout_gravity="end|top" />
     <TextView
         android:id="@+id/score"
+        android:text="000000"
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="30dp"
