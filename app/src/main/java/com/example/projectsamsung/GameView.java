@@ -15,17 +15,16 @@ import com.example.projectsamsung.sprite.BoosSprite;
 import com.example.projectsamsung.sprite.CircleSprite;
 import com.example.projectsamsung.sprite.CubeSprite;
 import com.example.projectsamsung.sprite.Sprite;
-import com.example.projectsamsung.sprite.SpriteVanish;
+
 
 import java.util.ArrayList;
 
 
 public class GameView extends View {
-    private GameViewBinding binding;
     private boolean BOOSFIGHT = false;
     public static GameInfo info = new GameInfo();
-    private final ArrayList<Sprite> sprites = new ArrayList<>(); // массив со всеми станциями
-    final ArrayList<SpriteVanish> spriteVan = new ArrayList<>();
+    private final ArrayList<Sprite> sprites = new ArrayList<>(); // массив со всеми спрайтами
+
     private Thread generateSprite; // TODO: перенести на таймер обратного отсчёта
 
     // конструктор при вызове которого добавляется станция
@@ -42,7 +41,7 @@ public class GameView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         float touchX = event.getX();
         float touchY = event.getY();
-if(BOOSFIGHT == false) {
+if(!BOOSFIGHT) {
     final ArrayList<Sprite> removeSprites = new ArrayList<>();
 
     for (Sprite sprite : sprites) {
@@ -97,19 +96,21 @@ if(BOOSFIGHT == false) {
         float x = (float) (Math.random() * getWidth());
         float y = (float) (Math.random() * getHeight());
         int random = (int) (Math.random() * 2);
-        if(info.getKolSprites() == 10 || info.getKolSprites() == 10){
+        if(info.getKolSprites() % 15 == 0 && info.getKolSprites() != 0){
             BOOSFIGHT = true;
             sprites.clear();
+
             sprites.add(new BoosSprite(getWidth()/2,getHeight()/2,getWidth(),getHeight()));
         }else{
+            for (Sprite spr: sprites) {
+                spr.addIter();
+            }
         switch (random) {
             case 0:
                 sprites.add(new CubeSprite(x, y, getWidth()*getHeight()));
-                spriteVan.add(new SpriteVanish(sprites.get(sprites.size()-1)));
                 break;
             case 1:
                 sprites.add(new CircleSprite(x,y,getWidth()*getHeight()));
-                spriteVan.add(new SpriteVanish(sprites.get(sprites.size()-1)));
                 break;
         }}
         info.addKolSprites(1);
@@ -118,15 +119,21 @@ if(BOOSFIGHT == false) {
 
 
 private void MissSprites(){
-    for (SpriteVanish spr: spriteVan) {
+     final ArrayList<Sprite> missingSprites = new ArrayList<>(); // массив со всеми спрайтами
 
-         if(spr.getIter() >= 2){
-            sprites.remove(spr.getSprite());
-            spriteVan.remove(spr);
-            invalidate();
+    for (Sprite spr: sprites) {
+        spr.addIter();
+        if(spr.getIter() >= 5){
+            missingSprites.add(spr);
+            info.addMissingSprite(1);
         }
     }
-}
+    sprites.removeAll(missingSprites);
+
+
+    }
+
+
     private class GenerateSpriteThread extends Thread {
 
         int Time = 1500;
@@ -138,15 +145,16 @@ private void MissSprites(){
                 while (!isInterrupted()) {
 
                     Thread.sleep(Time);
-                    if(BOOSFIGHT == false){
-                    if(iterT == 5 && Time >= 300)iterT =0;Time-=10;
+                    if(!BOOSFIGHT){
+                    if(iterT == 2 && Time >= 200){
+                        iterT =0;
+                        Time-=20;
+                        System.out.println(Time);
+                    }
                     GameView.this.getHandler().post(GameView.this::addSprite);
                     iterT++;
-                    /*for (SpriteVanish spr: spriteVan) {
-                        spr.addIter();
 
-                    }
-                    MissSprites();*/
+                    MissSprites();
                 }}
             } catch (InterruptedException e) {
                 e.printStackTrace();

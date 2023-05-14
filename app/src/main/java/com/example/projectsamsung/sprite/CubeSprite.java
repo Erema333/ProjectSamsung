@@ -7,7 +7,13 @@ import android.graphics.Paint;
 public class CubeSprite extends Sprite {
     private final float halfWidth;
     private final Paint paint = new Paint();
-
+    int iter;
+    public void addIter(){
+        iter++;
+    }
+    public int getIter(){
+        return iter;
+    }
     public CubeSprite(float x, float y, float width) {
         super(x, y);
         halfWidth = width / 25000;

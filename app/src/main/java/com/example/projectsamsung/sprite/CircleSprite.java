@@ -7,6 +7,13 @@ import android.graphics.Paint;
 public class CircleSprite extends Sprite{
     int radius;
     private final Paint paint = new Paint();
+    int iter;
+    public void addIter(){
+        iter++;
+    }
+    public int getIter(){
+        return iter;
+    }
     public CircleSprite(float x, float y, float width) {
         super(x, y);
         radius = (int) (width / 25000);

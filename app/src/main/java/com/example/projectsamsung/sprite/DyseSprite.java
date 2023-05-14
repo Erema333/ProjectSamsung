@@ -10,7 +10,7 @@ import android.util.DisplayMetrics;
 import com.example.projectsamsung.R;
 
 public class DyseSprite extends Sprite{
-
+int iter = 0;
 
 
 
