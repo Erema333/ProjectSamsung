@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectsamsung.databinding.GameViewBinding;
@@ -16,7 +18,7 @@ import com.example.projectsamsung.databinding.GameViewBinding;
 
 
 // Класс для оброботки взаимодействий пользователя || Основная активити
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements GameInfo.CallbackA {
     private GameViewBinding binding;
     ScoreThread sc = new ScoreThread();
 
@@ -28,19 +30,14 @@ public class GameActivity extends AppCompatActivity {
 
         sc.start();
 
+    }
 
-
-
-
-        }
-    public void goOnGameOver(){
-
-
+    @Override
+    public void callingBack() {
         Intent intent = new Intent();
         intent.setClass(GameActivity.this, GameOverActivity.class);
         startActivity(intent);
     }
-
 
 
     class ScoreThread extends Thread{
@@ -49,10 +46,8 @@ public class GameActivity extends AppCompatActivity {
         public void run() {
             while (true){
 
-//if(info.getMissingSprite() >= 3)goOnGameOver();interrupt();
+
                 binding.score.setText(Integer.toString(info.getScore()));
-
-
 
 }
             }
@@ -72,5 +67,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         binding.game.onStop();
+        Intent iii = new Intent();
+        iii.setClass(GameActivity.this, PreviewActivity.class);
+        startActivity(iii);
     }
 }

@@ -25,11 +25,16 @@ private int kolSprites = 0;
     public void addMissingSprite(int missingSprite) {
         this.missingSprite += missingSprite;
     }
-    public int getTimeInSecond() {
-        return timeInSecond;
+
+
+    public interface CallbackA{
+        void callingBack();
     }
 
-    public void setTimeInSecond(int timeInSecond) {
-        this.timeInSecond = timeInSecond;
+    CallbackA callback;
+
+    public void registerCallBack(CallbackA callback){
+        this.callback = callback;
     }
+
 }

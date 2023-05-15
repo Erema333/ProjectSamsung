@@ -1,6 +1,9 @@
 package com.example.projectsamsung;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Handler;
@@ -126,11 +129,22 @@ private void MissSprites(){
         if(spr.getIter() >= 5){
             missingSprites.add(spr);
             info.addMissingSprite(1);
+            if(info.getMissingSprite() >= 3)getOnGameOver();
         }
     }
     sprites.removeAll(missingSprites);
 
 
+    }
+
+    private void getOnGameOver() {
+        MyTask task = new MyTask();
+        task.setOnTaskCompletedListener(new MyTask.OnTaskCompleted() {
+            @Override
+            public void onCompleted() {
+                // выполнить какие-то действия при получении результатов
+            }
+        });
     }
 
 
@@ -145,20 +159,20 @@ private void MissSprites(){
                 while (!isInterrupted()) {
 
                     Thread.sleep(Time);
-                    if(!BOOSFIGHT){
-                    if(iterT == 2 && Time >= 200){
-                        iterT =0;
-                        Time-=20;
-                        System.out.println(Time);
-                    }
-                    GameView.this.getHandler().post(GameView.this::addSprite);
-                    iterT++;
+                    if (!BOOSFIGHT) {
+                        if (iterT == 2 && Time >= 200) {
+                            iterT = 0;
+                            Time -= 20;
+                            System.out.println(Time);
+                        }
+                        GameView.this.getHandler().post(GameView.this::addSprite);
+                        iterT++;
 
-                    MissSprites();
-                }}
+                        MissSprites();
+                    }
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
-    }
-}
+        }}}
+
