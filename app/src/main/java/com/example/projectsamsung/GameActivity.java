@@ -9,18 +9,17 @@ import androidx.annotation.Nullable;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectsamsung.databinding.GameViewBinding;
 
 
-
 // Класс для оброботки взаимодействий пользователя || Основная активити
-public class GameActivity extends AppCompatActivity implements GameInfo.CallbackA {
+public class GameActivity extends AppCompatActivity implements GameInfoListener {
     private GameViewBinding binding;
     ScoreThread sc = new ScoreThread();
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,13 +30,24 @@ public class GameActivity extends AppCompatActivity implements GameInfo.Callback
         sc.start();
 
     }
-
-    @Override
-    public void callingBack() {
-        Intent intent = new Intent();
-        intent.setClass(GameActivity.this, GameOverActivity.class);
-        startActivity(intent);
+    public android.content.res.Resources Resources(){
+        return getResources();
     }
+public void changeActivity(){
+        sc.interrupt();
+    Intent intent = new Intent();
+    intent.setClass(GameActivity.this, PreviewActivity.class);
+    startActivity(intent);
+    System.out.println("ОНО ЖИВОЕ");
+    finish();
+}
+    @Override
+    public void callingBack(GameActivity activty) {
+
+activty.changeActivity();
+    }
+
+
 
 
     class ScoreThread extends Thread{
@@ -48,7 +58,7 @@ public class GameActivity extends AppCompatActivity implements GameInfo.Callback
 
 
                 binding.score.setText(Integer.toString(info.getScore()));
-
+                //if(info.getScore() >= 3)info.callingBack(GameActivity.this);
 }
             }
         }
@@ -65,10 +75,11 @@ public class GameActivity extends AppCompatActivity implements GameInfo.Callback
 
     @Override
     protected void onStop() {
-        super.onStop();
-        binding.game.onStop();
         Intent iii = new Intent();
         iii.setClass(GameActivity.this, PreviewActivity.class);
         startActivity(iii);
+        super.onStop();
+        binding.game.onStop();
+
     }
 }

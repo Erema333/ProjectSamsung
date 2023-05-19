@@ -1,9 +1,10 @@
 package com.example.projectsamsung;
 
-public class GameInfo {
+public class GameInfo implements GameInfoListener  {
     private int score = 0;
     private int missingSprite = 0;
     private int timeInSecond;
+    GameInfoListener callback;
 private int kolSprites = 0;
     public int getScore() {
         return score;
@@ -18,23 +19,21 @@ private int kolSprites = 0;
 
     public void addKolSprites(int kolSprites) {
         this.kolSprites += kolSprites;
+
     }
     public int getMissingSprite() {
         return missingSprite;
+    }
+    public void registerCallBack(GameInfoListener callback){
+        this.callback = callback;
     }
     public void addMissingSprite(int missingSprite) {
         this.missingSprite += missingSprite;
     }
 
 
-    public interface CallbackA{
-        void callingBack();
+    @Override
+    public void callingBack(GameActivity activty) {
+        activty.changeActivity();
     }
-
-    CallbackA callback;
-
-    public void registerCallBack(CallbackA callback){
-        this.callback = callback;
-    }
-
 }

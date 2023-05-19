@@ -17,6 +17,7 @@ import com.example.projectsamsung.databinding.GameViewBinding;
 import com.example.projectsamsung.sprite.BoosSprite;
 import com.example.projectsamsung.sprite.CircleSprite;
 import com.example.projectsamsung.sprite.CubeSprite;
+import com.example.projectsamsung.sprite.DyseSprite;
 import com.example.projectsamsung.sprite.Sprite;
 
 
@@ -98,7 +99,7 @@ if(!BOOSFIGHT) {
     private void addSprite() {
         float x = (float) (Math.random() * getWidth());
         float y = (float) (Math.random() * getHeight());
-        int random = (int) (Math.random() * 2);
+        int random = (int) (Math.random() * 3);
         if(info.getKolSprites() % 15 == 0 && info.getKolSprites() != 0){
             BOOSFIGHT = true;
             sprites.clear();
@@ -110,10 +111,16 @@ if(!BOOSFIGHT) {
             }
         switch (random) {
             case 0:
-                sprites.add(new CubeSprite(x, y, getWidth()*getHeight()));
+                sprites.add(new DyseSprite((int) (Math.random() * getWidth()),(int)(Math.random() * getHeight()),GameView.this, getWidth(), getHeight()));
+                //sprites.add(new CubeSprite(x, y, getWidth()*getHeight()));
                 break;
             case 1:
-                sprites.add(new CircleSprite(x,y,getWidth()*getHeight()));
+                sprites.add(new DyseSprite((int) (Math.random() * getWidth()),(int)(Math.random() * getHeight()),GameView.this, getWidth(), getHeight()));
+
+                break;
+            case 2:
+                sprites.add(new DyseSprite((int) (Math.random() * getWidth()),(int)(Math.random() * getHeight()),GameView.this, getWidth(), getHeight()));
+               // sprites.add(new CircleSprite(x,y,getWidth()*getHeight()));
                 break;
         }}
         info.addKolSprites(1);
@@ -138,13 +145,7 @@ private void MissSprites(){
     }
 
     private void getOnGameOver() {
-        MyTask task = new MyTask();
-        task.setOnTaskCompletedListener(new MyTask.OnTaskCompleted() {
-            @Override
-            public void onCompleted() {
-                // выполнить какие-то действия при получении результатов
-            }
-        });
+
     }
 
 

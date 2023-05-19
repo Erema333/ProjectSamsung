@@ -1,6 +1,7 @@
 package com.example.projectsamsung;
 import static com.example.projectsamsung.GameView.info;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,4 +16,13 @@ public class GameOverActivity extends AppCompatActivity {
         binding = GameoverViewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.scoreees.setText(Integer.toString(info.getScore()));
-}}
+}
+
+    @Override
+    protected void onStop() {
+        Intent iii = new Intent();
+        iii.setClass(GameOverActivity.this, PreviewActivity.class);
+        startActivity(iii);
+        super.onStop();
+    }
+}

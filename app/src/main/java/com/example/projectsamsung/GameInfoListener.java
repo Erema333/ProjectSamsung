@@ -1,14 +1,11 @@
 package com.example.projectsamsung;
 
+import java.util.logging.Handler;
+
 interface GameInfoListener{
-    void callingBack();
+     void callingBack(GameActivity activty);
+
+
+
 }
-
-
-
-    class State {
-       public void getNewActivity(){
-
-       }
-    }
 
