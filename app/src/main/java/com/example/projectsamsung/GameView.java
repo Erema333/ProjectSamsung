@@ -28,7 +28,7 @@ public class GameView extends View {
     private boolean BOOSFIGHT = false;
     public static GameInfo info = new GameInfo();
     private final ArrayList<Sprite> sprites = new ArrayList<>(); // массив со всеми спрайтами
-
+int t = 30;
     private Thread generateSprite; // TODO: перенести на таймер обратного отсчёта
 
     // конструктор при вызове которого добавляется станция
@@ -102,32 +102,39 @@ if(!BOOSFIGHT) {
         int random = (int) (Math.random() * 3);
         if(info.getKolSprites() % 15 == 0 && info.getKolSprites() != 0){
             BOOSFIGHT = true;
+            info.addBossMode(true);
+
             sprites.clear();
 
-            sprites.add(new BoosSprite(getWidth()/2,getHeight()/2,getWidth(),getHeight()));
+            sprites.add(new BoosSprite(getWidth()/2,getHeight()/2,getWidth(),getHeight(), t,GameView.this));
+            if(t > 10)t-=2  ;
         }else{
             for (Sprite spr: sprites) {
                 spr.addIter();
             }
         switch (random) {
             case 0:
-                sprites.add(new DyseSprite((int) (Math.random() * getWidth()),(int)(Math.random() * getHeight()),GameView.this, getWidth(), getHeight()));
-                //sprites.add(new CubeSprite(x, y, getWidth()*getHeight()));
+                //sprites.add(new DyseSprite((int) (Math.random() * getWidth()),(int)(Math.random() * getHeight()),GameView.this, getWidth(), getHeight()));
+                sprites.add(new CubeSprite(x, y, getWidth()*getHeight()));
                 break;
             case 1:
-                sprites.add(new DyseSprite((int) (Math.random() * getWidth()),(int)(Math.random() * getHeight()),GameView.this, getWidth(), getHeight()));
+               // sprites.add(new DyseSprite((int) (Math.random() * getWidth()),(int)(Math.random() * getHeight()),GameView.this, getWidth(), getHeight()));
+                sprites.add(new CircleSprite(x,y,getWidth()*getHeight()));
 
                 break;
             case 2:
-                sprites.add(new DyseSprite((int) (Math.random() * getWidth()),(int)(Math.random() * getHeight()),GameView.this, getWidth(), getHeight()));
-               // sprites.add(new CircleSprite(x,y,getWidth()*getHeight()));
+               //sprites.add(new DyseSprite((int) (Math.random() * getWidth()),(int)(Math.random() * getHeight()),GameView.this, getWidth(), getHeight()));
+                sprites.add(new CircleSprite(x,y,getWidth()*getHeight()));
                 break;
         }}
         info.addKolSprites(1);
         invalidate();
     }
 
-
+public void missBoss(){
+        sprites.clear();
+        info.addMissingSprite(10);
+}
 private void MissSprites(){
      final ArrayList<Sprite> missingSprites = new ArrayList<>(); // массив со всеми спрайтами
 

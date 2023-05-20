@@ -56,7 +56,12 @@ activty.changeActivity();
         public void run() {
             while (true){
 
-
+if(info.getBossMode()){
+    binding.timer.setVisibility(0);
+    binding.timer.setText(Integer.toString(info.getTimeBoss()));
+}
+else {
+    binding.timer.setVisibility(0);}
                 binding.score.setText(Integer.toString(info.getScore()));
                 //if(info.getScore() >= 3)info.callingBack(GameActivity.this);
 }

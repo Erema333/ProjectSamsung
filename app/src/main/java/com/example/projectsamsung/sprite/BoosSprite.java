@@ -3,20 +3,41 @@ package com.example.projectsamsung.sprite;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import static com.example.projectsamsung.GameView.info;
+import com.example.projectsamsung.GameView;
 
 public class BoosSprite extends Sprite {
     int radius;
     float width;
     float height;
+     int t;
+     GameView view;
     int kolNag = 30;
     private final Paint paint = new Paint();
-    public BoosSprite(float x, float y, float width,float height) {
+    class Timer extends Thread{
+        @Override
+        public void run() {
+            t--;
+            info.addTimeBoss(t);
+            System.out.println(info.getTimeBoss());
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                if(t == 0)view.missBoss();
+            }
+        }
+    }
+    public BoosSprite(float x, float y, float width, float height, int t, GameView gameView) {
         super(x, y);
         radius = (int) (300);
         this.width = width;
         this.height = height;
+        this.t = t;
+        view = gameView;
         paint.setColor(Color.BLACK);
-
+Timer th = new Timer();
+th.start();
     }
 public void removeNag(){
     System.out.println(kolNag);
