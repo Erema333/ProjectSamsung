@@ -1,19 +1,11 @@
 package com.example.projectsamsung.sprite;
 
-import static android.graphics.Bitmap.Config.RGB_565;
-
-import android.annotation.SuppressLint;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.ColorSpace;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
-import android.util.DisplayMetrics;
 
-import com.example.projectsamsung.GameActivity;
 import com.example.projectsamsung.GameView;
 import com.example.projectsamsung.R;
 

@@ -107,7 +107,7 @@ if(!BOOSFIGHT) {
             sprites.clear();
 
             sprites.add(new BoosSprite(getWidth()/2,getHeight()/2,getWidth(),getHeight(), t,GameView.this));
-            if(t > 10)t-=2  ;
+            if(t > 10)t-=5  ;
         }else{
             for (Sprite spr: sprites) {
                 spr.addIter();
@@ -132,8 +132,11 @@ if(!BOOSFIGHT) {
     }
 
 public void missBoss(){
+
+        BOOSFIGHT = false;
         sprites.clear();
         info.addMissingSprite(10);
+        invalidate();
 }
 private void MissSprites(){
      final ArrayList<Sprite> missingSprites = new ArrayList<>(); // массив со всеми спрайтами

@@ -1,8 +1,8 @@
 package com.example.projectsamsung;
 
-import java.util.logging.Handler;
+import com.example.projectsamsung.Activitys.GameActivity;
 
-interface GameInfoListener{
+public interface GameInfoListener{
      void callingBack(GameActivity activty);
 
 

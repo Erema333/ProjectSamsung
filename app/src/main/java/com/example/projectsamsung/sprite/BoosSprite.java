@@ -17,15 +17,18 @@ public class BoosSprite extends Sprite {
     class Timer extends Thread{
         @Override
         public void run() {
-            t--;
+            while (t > 0 && kolNag > 0){
+                t--;
             info.addTimeBoss(t);
             System.out.println(info.getTimeBoss());
             try {
                 sleep(1000);
+                if (t == 0) view.missBoss();
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                if(t == 0)view.missBoss();
+
             }
+        }
         }
     }
     public BoosSprite(float x, float y, float width, float height, int t, GameView gameView) {
@@ -60,5 +63,6 @@ public void removeNag(){
 
         canvas.drawCircle(width/2,height/2,radius,paint);
     }
+
 }
 

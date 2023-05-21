@@ -1,4 +1,4 @@
-package com.example.projectsamsung;
+package com.example.projectsamsung.Activitys;
 import static com.example.projectsamsung.GameView.info;
 
 import android.content.Intent;

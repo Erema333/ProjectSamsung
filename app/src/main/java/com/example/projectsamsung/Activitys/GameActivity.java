@@ -1,4 +1,4 @@
-package com.example.projectsamsung;
+package com.example.projectsamsung.Activitys;
 
 import static com.example.projectsamsung.GameView.info;
 
@@ -12,6 +12,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.projectsamsung.GameInfoListener;
 import com.example.projectsamsung.databinding.GameViewBinding;
 
 
@@ -63,7 +64,7 @@ if(info.getBossMode()){
 else {
     binding.timer.setVisibility(0);}
                 binding.score.setText(Integer.toString(info.getScore()));
-                //if(info.getScore() >= 3)info.callingBack(GameActivity.this);
+               // if(info.getScore() >= 3)info.callingBack(GameActivity.this);
 }
             }
         }

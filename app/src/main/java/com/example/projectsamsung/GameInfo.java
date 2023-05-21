@@ -1,10 +1,12 @@
 package com.example.projectsamsung;
 
+import com.example.projectsamsung.Activitys.GameActivity;
+
 public class GameInfo implements GameInfoListener  {
     private int score = 0;
     private int missingSprite = 0;
-    int BoosT;
-    boolean BoosMode;
+    int BoosT = -1;
+    boolean BoosMode = false;
     private int timeInSecond;
     GameInfoListener callback;
 private int kolSprites = 0;
@@ -28,7 +30,7 @@ private int kolSprites = 0;
 
 
     public void addTimeBoss(int score) {
-        this.BoosT = BoosT;
+        this.BoosT = score;
     }
     public int getTimeBoss() {
         return BoosT;
