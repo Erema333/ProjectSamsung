@@ -5,9 +5,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 public class CubeSprite extends Sprite {
-    private final float halfWidth;
+    private float halfWidth;
     private final Paint paint = new Paint();
     int iter;
+    float xCenter = x-halfWidth;
+    float yCenter = y-halfWidth;
     public void addIter(){
         iter++;
     }
@@ -22,8 +24,8 @@ public class CubeSprite extends Sprite {
 
     @Override
     public boolean onTouchSprite(float touchX, float touchY) {
-        if(((x < touchX&&x > touchX-50)||x > touchX&&x < touchX+50)
-                &&((y < touchY&&y > touchY-50)||y > touchY&&y < touchY+50) ){
+        if(((xCenter < touchX&&xCenter > touchX-halfWidth)||xCenter > touchX&&xCenter < touchX+halfWidth)
+                &&((yCenter < touchY&&yCenter > touchY-halfWidth)||yCenter > touchY&&yCenter < touchY+halfWidth) ){
 
                 return true;
             } return false;}

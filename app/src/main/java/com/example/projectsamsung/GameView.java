@@ -97,8 +97,8 @@ if(!BOOSFIGHT) {
     }
 
     private void addSprite() {
-        float x = (float) (Math.random() * getWidth());
-        float y = (float) (Math.random() * getHeight());
+        float x = (float) (Math.random() * (getWidth()-((getWidth()*getHeight())/11000)));
+        float y = (float) (Math.random() * (getHeight()-((getWidth()*getHeight())/11000)));
         int random = (int) (Math.random() * 3);
         if(info.getKolSprites() % 15 == 0 && info.getKolSprites() != 0){
             BOOSFIGHT = true;

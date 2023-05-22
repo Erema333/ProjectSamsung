@@ -9,6 +9,9 @@ import androidx.annotation.Nullable;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,9 +30,9 @@ public class GameActivity extends AppCompatActivity implements GameInfoListener 
         binding = GameViewBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-
+        if(info.getMissingSprite() >= 3)info.callingBack(GameActivity.this);
         sc.start();
-
+        if(info.getMissingSprite() >= 3)info.callingBack(GameActivity.this);
     }
     public android.content.res.Resources Resources(){
         return getResources();
@@ -47,6 +50,13 @@ public void changeActivity(){
 
 activty.changeActivity();
     }
+    public  void invisible(){
+
+        binding.timer.setVisibility(View.INVISIBLE);
+    }
+    public  void visible(){
+        binding.timer.setVisibility(View.VISIBLE);
+    }
 
 
 
@@ -58,16 +68,25 @@ activty.changeActivity();
             while (true){
 
 if(info.getBossMode()){
-    binding.timer.setVisibility(0);
+  //  info.visibleView(GameActivity.this);
     binding.timer.setText(Integer.toString(info.getTimeBoss()));
 }
 else {
-    binding.timer.setVisibility(0);}
+    // info.invisibleView(GameActivity.this);
+}
                 binding.score.setText(Integer.toString(info.getScore()));
-               // if(info.getScore() >= 3)info.callingBack(GameActivity.this);
+
+
+                if(info.getMissingSprite() >= 3){
+                    Handler handler = new Handler(getMainLooper());
+                    handler.obtainMessage(11, GameActivity.this);
+                }
+
+                }
+
 }
             }
-        }
+
 
 
     @Override

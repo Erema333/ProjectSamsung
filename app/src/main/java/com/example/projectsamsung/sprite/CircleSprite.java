@@ -22,8 +22,8 @@ public class CircleSprite extends Sprite{
 
     @Override
     public boolean onTouchSprite(float touchX, float touchY) {
-        if(((x < touchX&&x > touchX-50)||x > touchX&&x < touchX+50)
-                &&((y < touchY&&y > touchY-50)||y > touchY&&y < touchY+50) ){
+        if(((x < touchX&&x > touchX-radius)||x > touchX&&x < touchX+radius)
+                &&((y < touchY&&y > touchY-radius)||y > touchY&&y < touchY+radius) ){
 
             return true;
         } return false;}

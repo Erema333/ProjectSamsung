@@ -54,4 +54,10 @@ private int kolSprites = 0;
     public void callingBack(GameActivity activty) {
         activty.changeActivity();
     }
+    public  void  invisibleView(GameActivity activity){
+        activity.invisible();
+    }
+    public  void  visibleView(GameActivity activity){
+activity.visible();
+    }
 }
